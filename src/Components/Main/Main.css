@@ -1,5 +1,36 @@
 .Main {
-	text-align: center;
-  background: linear-gradient(140deg, #FFF0B3,#FFAFF2,#d850c1);
-  height: 100vh;
-}
+    text-align: center;
+    background: linear-gradient(140deg, #FFF0B3, #FFAFF2, #d850c1);
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .Main > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fade-in 5s ease forwards infinite;
+
+  }
+  
+  #buttonConatiner{
+    position: absolute;
+    top: 1%;
+    right: 0.7%;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0.9;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.4);
+      }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
