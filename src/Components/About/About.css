@@ -1,0 +1,34 @@
+.About {
+    font-family: Gisha;
+
+}
+.About>h1{
+    direction: rtl;
+    font-size: 8vh;
+}
+#aboutContainer{
+    display: flex;
+    justify-content: center;
+    font-size: 6vh;
+    text-align: center;
+}
+#aboutContainer>p{
+    
+    width: 70%;
+}
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(120px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 2.5s ease-in-out forwards;
+    opacity: 0;
+  }
+    

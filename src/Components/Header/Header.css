@@ -1,3 +1,23 @@
 .Header {
-	
+	display: flex;
+    justify-content:space-between;
 }
+
+#buttonConatiner{
+    position: relative;
+    top: 1%;
+    right: 1.3%;
+  }
+
+  #favAndCart{
+    position: relative;
+    top: 1%;
+    left: 1.3%;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  #buttonConatiner>button:hover{
+    background-color: red;
+  }
