@@ -11,7 +11,7 @@ function Header(): JSX.Element {
   return (
     <div className="Header">
       <div id="favAndCart">
-        <ShoppingCartOutlinedIcon style={{fontSize:"7vh"}} />
+        <a href="/cart"><ShoppingCartOutlinedIcon style={{fontSize:"7vh"}} /></a>
         <FavoriteOutlinedIcon style={{fontSize:"7vh"}} />
       </div>
       <div id="buttonConatiner">

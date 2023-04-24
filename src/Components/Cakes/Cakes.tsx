@@ -1,6 +1,7 @@
 import Cake from "../Cake/Cake";
 import Header from "../Header/Header";
 import "./Cakes.css";
+import { cakesdata, cakesdataInterface } from "../../Data/cakesdata";
 
 function Cakes(): JSX.Element {
   return (
@@ -8,9 +9,9 @@ function Cakes(): JSX.Element {
       <Header />
       <h1>העוגות שלי</h1>
       <div id="cakesContainer">
-        <Cake />
-        <Cake />
-        <Cake />
+        {cakesdata.map((item:cakesdataInterface)=><Cake {...item}/>) }
+        
+        
       </div>
     </div>
   );
