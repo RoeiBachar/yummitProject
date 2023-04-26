@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import "./Cart.css";
-import { cakesdataInterface } from "../../Data/cakesdata";
+import { CakeInterface, CakesArray } from "../../Data/cakesdata";
 import {
   TableContainer,
   Paper,
@@ -13,27 +13,49 @@ import {
 } from "@mui/material";
 
 function Cart(): JSX.Element {
-  const [getData, setData] = useState<cakesdataInterface[]>();
-  const [getCopyData, setCopyData] = useState<cakesdataInterface[]>();
+  const [cakes, setCakes] = useState<CakeInterface[]>(CakesArray);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [cart, setCart] = useState<{ [key: string]: number }>({});
+
+  console.log("cart", cart);
+  console.log("cakes", cakes);
 
   useEffect(() => {
-    const data = localStorage.getItem("myCart");
-    if (data) {
-      setData(JSON.parse(data));
-      const newData=JSON.parse(data);
-      newData.map(item=>{})
-      const mydata={...newData, counter:  newData.map((item:cakesdataInterface)=>countMyObject(newData,item))}
-      console.log(mydata)
+    const myCartLocalStorage = localStorage.getItem("myCart");
+    if (myCartLocalStorage) {
+      const cart: { [key: string]: number } = JSON.parse(myCartLocalStorage);
+      setCart(cart);
+      let sum = 0;
+      cakes.map((item) => (sum += cart[item.id] * item.price));
+      setTotalPrice(sum);
     } else {
       console.log("הסל ריק");
     }
-  },[]);
+  }, []);
+  const countMyObject = (myArray: CakeInterface[], myObject: CakeInterface) =>
+    myArray.filter((obj) => obj.id === myObject.id).length;
 
-  const countMyObject = (myArray: cakesdataInterface[], myObject: cakesdataInterface) =>
-  myArray.filter(obj =>  obj.name === myObject.name).length;
-  
-  
-  
+  const increaseCount = (id: string) => {
+    const cartClone = { ...cart };
+    cartClone[id]++;
+    setCart(cartClone);
+    if (localStorage.getItem("myCart")) {
+      const myCartClone = JSON.stringify(cartClone);
+      localStorage.setItem("myCart", myCartClone);
+    }
+  };
+  const decreaseCount = (id: string) => {
+    const cartClone = { ...cart };
+    if (cartClone[id] - 1 >= 0) {
+      cartClone[id]--;
+    }
+    setCart(cartClone);
+    if (localStorage.getItem("myCart")) {
+      const myCartClone = JSON.stringify(cartClone);
+      localStorage.setItem("myCart", myCartClone);
+    }
+  };
+
   return (
     <div className="Cart">
       <Header />
@@ -43,32 +65,90 @@ function Cart(): JSX.Element {
           component={Paper}
           style={{ width: "150vh", alignItems: "center" }}
         >
-          <Table sx={{ minWidth: 350, }} aria-label="simple table">
+          <Table
+            style={{ textAlign: "center" }}
+            sx={{ minWidth: 350 }}
+            aria-label="simple table"
+          >
             <TableHead>
               <TableRow>
-                <TableCell style={{fontSize:"3vh"}}>Dessert (100g serving)</TableCell>
-                <TableCell style={{fontSize:"3vh"}} align="right">שם</TableCell>
-                <TableCell style={{fontSize:"3vh"}} align="right">תמונה</TableCell>
-                <TableCell style={{fontSize:"3vh"}} align="right">מחיר</TableCell>
+                <TableCell
+                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  align="center"
+                >
+                  מחיר
+                </TableCell>
+                <TableCell
+                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  align="center"
+                >
+                  שם
+                </TableCell>
+                <TableCell
+                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  align="center"
+                >
+                  תמונה
+                </TableCell>
+                <TableCell
+                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  align="center"
+                >
+                  כמות
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {getData &&
-                getData.map((item) => (
+              {cakes
+                .filter((cake) => cart[cake.id])
+                .map((cake) => (
                   <TableRow
-                    key={item.name}
+                    key={cake.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell style={{fontSize:"3vh"}} component="th" scope="row">
-                     
+                    <TableCell
+                      style={{ fontSize: "3vh" }}
+                      component="th"
+                      scope="row"
+                      align="center"
+                    >
+                      {`${cake.price}`}₪
                     </TableCell>
-                    <TableCell style={{fontSize:"3vh"}} align="right">{item.name}</TableCell>
-                    <TableCell style={{fontSize:"3vh"}} align="right">
-                      <img src={item.img} width={"353vh"} height={"205vh"}/>
+                    <TableCell style={{ fontSize: "3vh" }} align="center">
+                      {cake.name}
                     </TableCell>
-                    <TableCell style={{fontSize:"3vh"}} align="right">{`${item.price}`}</TableCell>
+                    <TableCell style={{ fontSize: "3vh" }} align="center">
+                      <img src={cake.img} width={"353vh"} height={"205vh"} />
+                    </TableCell>
+                    <TableCell style={{ fontSize: "3vh" }} align="center">
+                      {" "}
+                      <button
+                        onClick={() => {
+                          decreaseCount(cake.id);
+                            setTotalPrice(totalPrice - cake.price);
+                        }}
+                        type="button"
+                      >
+                        -
+                      </button>
+                      {cart[cake.id]}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          increaseCount(cake.id);
+                            setTotalPrice(totalPrice + cake.price);
+                        }}
+                      >
+                        +
+                      </button>
+                    </TableCell>
                   </TableRow>
                 ))}
+              <TableRow>
+                <TableCell style={{ fontSize: "4vh" }} align="center">
+                  {totalPrice}&#8362;
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
