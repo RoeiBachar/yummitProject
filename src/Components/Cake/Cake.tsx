@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import "./Cake.css";
 import { CakeInterface } from "../../Data/cakesdata";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function Cake(props: CakeInterface): JSX.Element {
   const addToCart = () => {
@@ -36,7 +38,7 @@ function Cake(props: CakeInterface): JSX.Element {
           title="green iguana"
         />
         <CardContent
-          style={{ textAlign: "center", backgroundColor: "transparent" }}
+          style={{ textAlign: "center", backgroundColor: "rgb(251, 165, 237)" }}
         >
           <Typography
             gutterBottom
@@ -54,12 +56,12 @@ function Cake(props: CakeInterface): JSX.Element {
             {`${props.price}`}&#8362;
           </Typography>
         </CardContent>
-        <CardActions style={{ alignItems: "center" }}>
-          <Button size="small" onClick={addToCart}>
-            הזמן
+        <div id="buttonsContainer">
+          <Button size="large" onClick={addToCart}>
+            <AddShoppingCartIcon fontSize="inherit" style={{color:"black"}}/>
           </Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
+          <Button size="small"><FavoriteBorderIcon fontSize="inherit" style={{color:"black"}}/></Button>
+        </div>
       </Card>
     </div>
   );

@@ -1,3 +1,13 @@
 .Cake {
 	width: 30vh;
 }
+
+#buttonsContainer>button{
+    font-size: 5vh;
+    
+}
+#buttonsContainer{
+    background-color:rgb(251, 165, 237)
+    
+}
+

@@ -73,25 +73,25 @@ function Cart(): JSX.Element {
             <TableHead>
               <TableRow>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
                   align="center"
                 >
                   מחיר
                 </TableCell>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
                   align="center"
                 >
                   שם
                 </TableCell>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
                   align="center"
                 >
                   תמונה
                 </TableCell>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" }}
+                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
                   align="center"
                 >
                   כמות
@@ -104,23 +104,25 @@ function Cart(): JSX.Element {
                 .map((cake) => (
                   <TableRow
                     key={cake.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    sx={{ "&:last-child td, &:last-child th": { border:5 } }}
+                    
                   >
                     <TableCell
-                      style={{ fontSize: "3vh" }}
+                      style={{ fontSize: "3vh",border:"1px solid black" }}
                       component="th"
                       scope="row"
                       align="center"
+                      
                     >
                       {`${cake.price}`}₪
                     </TableCell>
-                    <TableCell style={{ fontSize: "3vh" }} align="center">
+                    <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
                       {cake.name}
                     </TableCell>
-                    <TableCell style={{ fontSize: "3vh" }} align="center">
+                    <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
                       <img src={cake.img} width={"353vh"} height={"205vh"} />
                     </TableCell>
-                    <TableCell style={{ fontSize: "3vh" }} align="center">
+                    <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
                       {" "}
                       <button
                         onClick={() => {
