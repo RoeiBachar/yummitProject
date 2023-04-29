@@ -4,6 +4,8 @@ export interface CakeInterface {
     img: string,
     price: number,
     counter?: number
+    isFavorite?: boolean;
+    handleFavorite?: (cakeId: string, isFavorite: boolean) => void;
 }
 export const CakesArray = [
     {

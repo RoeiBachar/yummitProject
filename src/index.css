@@ -5,7 +5,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background: linear-gradient(140deg,  #FFAFF2, #d850c1);
-  height: 200vh;
+  height: auto;
   font-family: Gisha !important
 
  

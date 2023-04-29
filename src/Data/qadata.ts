@@ -13,7 +13,7 @@ export const qadata=[
     },
     {
         question:"מה עלות המשלוח?",
-        answer:"50 שקלים"
+        answer:"תלוי בערים, מקסימום 50 שקל"
     },
     {
         question:"האם ניתן לעשות איסוף עצמי?",

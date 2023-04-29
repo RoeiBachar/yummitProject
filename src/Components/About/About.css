@@ -1,22 +1,75 @@
-.About {
-    font-family: Gisha;
+/* For mobile devices */
+@media only screen and (max-width: 767px) {
+    .About>h1{
+      font-size: 5vh;
+    }
+    #aboutContainer{
+      flex-direction: column;
+      font-size: 3vh;
+    }
+    #aboutContainer>p{
+      width: 90%;
+    }
+  }
+  
+  /* For tablets and small laptops */
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .About>h1{
+      font-size: 6vh;
+    }
+    #aboutContainer{
+      flex-direction: column;
+      font-size: 4vh;
+      
+    }
+    #aboutContainer>p{
+      width: 80%;
+      text-align: center;
 
-}
-.About>h1{
+    }
+  }
+  
+  /* For larger laptops and desktops */
+  @media only screen and (min-width: 1024px) {
+    .About>h1{
+      font-size: 8vh;
+    }
+    #aboutContainer{
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 5vh;
+      text-align: center;
+
+    }
+    #aboutContainer>p{
+      width: 70%;
+    }
+  }
+  
+  /* Common styles for all screen sizes */
+  .About {
+    font-family: Gisha;
+    height: 100vh;
+  }
+  
+  .About>h1{
     direction: rtl;
-    font-size: 8vh;
-}
-#aboutContainer{
+  }
+  
+  #aboutContainer{
     display: flex;
     justify-content: center;
-    font-size: 6vh;
     text-align: center;
-}
-#aboutContainer>p{
-    
-    width: 70%;
-}
-@keyframes fadeInUp {
+    animation: fadeInUp 2.5s ease-in-out forwards;
+    opacity: 0;
+  }
+  
+  #aboutContainer>p{
+    margin: 0;
+  }
+  
+  @keyframes fadeInUp {
     from {
       opacity: 0;
       transform: translateY(120px);
@@ -27,8 +80,3 @@
     }
   }
   
-  .fade-in-up {
-    animation: fadeInUp 2.5s ease-in-out forwards;
-    opacity: 0;
-  }
-    

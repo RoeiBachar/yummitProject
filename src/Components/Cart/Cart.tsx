@@ -32,9 +32,6 @@ function Cart(): JSX.Element {
       console.log("הסל ריק");
     }
   }, []);
-  const countMyObject = (myArray: CakeInterface[], myObject: CakeInterface) =>
-    myArray.filter((obj) => obj.id === myObject.id).length;
-
   const increaseCount = (id: string) => {
     const cartClone = { ...cart };
     cartClone[id]++;
@@ -75,6 +72,7 @@ function Cart(): JSX.Element {
                 <TableCell
                   style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
                   align="center"
+                  
                 >
                   מחיר
                 </TableCell>
@@ -120,7 +118,7 @@ function Cart(): JSX.Element {
                       {cake.name}
                     </TableCell>
                     <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
-                      <img src={cake.img} width={"353vh"} height={"205vh"} />
+                      <img src={cake.img} style={{ width:"10vh",maxWidth: "100%", height:"10vh"}} />
                     </TableCell>
                     <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
                       {" "}

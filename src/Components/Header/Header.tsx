@@ -12,7 +12,8 @@ function Header(): JSX.Element {
     <div className="Header">
       <div id="favAndCart">
         <a href="/cart"><ShoppingCartOutlinedIcon style={{fontSize:"7vh"}} /></a>
-        <FavoriteOutlinedIcon style={{fontSize:"7vh"}} />
+        <a href="/favorites"><FavoriteOutlinedIcon style={{fontSize:"7vh"}} /></a>
+       
       </div>
       <div id="buttonConatiner">
         <PopupState variant="popover" popupId="demo-popup-menu">

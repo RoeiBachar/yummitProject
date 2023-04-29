@@ -15,7 +15,7 @@ function QA(): JSX.Element {
       <div id="qaContainer">
         {qadata.map(item=>
         <Accordion
-          style={{ width: "60vh", backgroundColor: "rgb(251, 165, 237)" }}
+          style={{ maxWidth:"100%",height:"auto",width: "60vh", backgroundColor: "rgb(251, 165, 237)" }}
         >
           <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
             <Typography style={{ fontSize: "3vh", fontWeight: "bold",fontFamily:"Gisha"}}>

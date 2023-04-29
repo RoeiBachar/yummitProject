@@ -6,6 +6,7 @@ import Cakes from "../Cakes/Cakes";
 import QA from "../QA/QA";
 import About from "../About/About";
 import Cart from "../Cart/Cart";
+import Favorites from "../Favorites/Favorites";
 
 function Routing(): JSX.Element {
   return (
@@ -16,6 +17,7 @@ function Routing(): JSX.Element {
         <Route path="/qa" element={<QA />} />
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/favorites" element={<Favorites />} />
         <Route path="*" element={<Main />} />
       </Routes>
     </div>
