@@ -11,11 +11,17 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/store";
+import { decrement, increment, updateAmount } from "../../redux/counterSlice";
 
 function Cart(): JSX.Element {
   const [cakes, setCakes] = useState<CakeInterface[]>(CakesArray);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cart, setCart] = useState<{ [key: string]: number }>({});
+  const [totalItems,setTotalItems]=useState(0);
+  const count = useSelector((state: RootState) => state.counter.value)
+  const dispatch = useDispatch()
 
   console.log("cart", cart);
   console.log("cakes", cakes);
@@ -25,9 +31,18 @@ function Cart(): JSX.Element {
     if (myCartLocalStorage) {
       const cart: { [key: string]: number } = JSON.parse(myCartLocalStorage);
       setCart(cart);
-      let sum = 0;
-      cakes.map((item) => (sum += cart[item.id] * item.price));
-      setTotalPrice(sum);
+
+      let priceSum = 0;
+      let itemsSum=0;
+      cakes.map((item) => {
+        priceSum += cart[item.id] * item.price;
+        itemsSum+= cart[item.id];
+      });
+      setTotalItems(itemsSum)
+      dispatch(updateAmount(itemsSum))
+      console.log(itemsSum);
+      
+      setTotalPrice(priceSum);
     } else {
       console.log("הסל ריק");
     }
@@ -36,23 +51,27 @@ function Cart(): JSX.Element {
     const cartClone = { ...cart };
     cartClone[id]++;
     setCart(cartClone);
-    if (localStorage.getItem("myCart")) {
-      const myCartClone = JSON.stringify(cartClone);
-      localStorage.setItem("myCart", myCartClone);
-    }
-  };
-  const decreaseCount = (id: string) => {
-    const cartClone = { ...cart };
-    if (cartClone[id] - 1 >= 0) {
-      cartClone[id]--;
-    }
-    setCart(cartClone);
+    dispatch(increment())
+
     if (localStorage.getItem("myCart")) {
       const myCartClone = JSON.stringify(cartClone);
       localStorage.setItem("myCart", myCartClone);
     }
   };
 
+  const decreaseCount = (id: string) => {
+    const cartClone = { ...cart };
+    if (cartClone[id] - 1 >= 0) {
+      cartClone[id]--;
+    }
+    setCart(cartClone);
+    dispatch(decrement())
+    if (localStorage.getItem("myCart")) {
+      const myCartClone = JSON.stringify(cartClone);
+      localStorage.setItem("myCart", myCartClone);
+    }
+  };
+  console.log(cart.length);
   return (
     <div className="Cart">
       <Header />
@@ -70,26 +89,41 @@ function Cart(): JSX.Element {
             <TableHead>
               <TableRow>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
+                  style={{
+                    fontSize: "3vh",
+                    fontWeight: "bold",
+                    border: "1px solid black",
+                  }}
                   align="center"
-                  
                 >
                   מחיר
                 </TableCell>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
+                  style={{
+                    fontSize: "3vh",
+                    fontWeight: "bold",
+                    border: "1px solid black",
+                  }}
                   align="center"
                 >
                   שם
                 </TableCell>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
+                  style={{
+                    fontSize: "3vh",
+                    fontWeight: "bold",
+                    border: "1px solid black",
+                  }}
                   align="center"
                 >
                   תמונה
                 </TableCell>
                 <TableCell
-                  style={{ fontSize: "3vh", fontWeight: "bold" ,border:"1px solid black"}}
+                  style={{
+                    fontSize: "3vh",
+                    fontWeight: "bold",
+                    border: "1px solid black",
+                  }}
                   align="center"
                 >
                   כמות
@@ -102,30 +136,44 @@ function Cart(): JSX.Element {
                 .map((cake) => (
                   <TableRow
                     key={cake.name}
-                    sx={{ "&:last-child td, &:last-child th": { border:5 } }}
-                    
+                    sx={{ "&:last-child td, &:last-child th": { border: 5 } }}
                   >
                     <TableCell
-                      style={{ fontSize: "3vh",border:"1px solid black" }}
+                      style={{ fontSize: "3vh", border: "1px solid black" }}
                       component="th"
                       scope="row"
                       align="center"
-                      
                     >
                       {`${cake.price}`}₪
                     </TableCell>
-                    <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
+                    <TableCell
+                      style={{ fontSize: "3vh", border: "1px solid black" }}
+                      align="center"
+                    >
                       {cake.name}
                     </TableCell>
-                    <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
-                      <img src={cake.img} style={{ width:"10vh",maxWidth: "100%", height:"10vh"}} />
+                    <TableCell
+                      style={{ fontSize: "3vh", border: "1px solid black" }}
+                      align="center"
+                    >
+                      <img
+                        src={cake.img}
+                        style={{
+                          width: "10vh",
+                          maxWidth: "100%",
+                          height: "10vh",
+                        }}
+                      />
                     </TableCell>
-                    <TableCell style={{ fontSize: "3vh",border:"1px solid black" }} align="center">
+                    <TableCell
+                      style={{ fontSize: "3vh", border: "1px solid black" }}
+                      align="center"
+                    >
                       {" "}
                       <button
                         onClick={() => {
                           decreaseCount(cake.id);
-                            setTotalPrice(totalPrice - cake.price);
+                          setTotalPrice(totalPrice - cake.price);
                         }}
                         type="button"
                       >
@@ -136,7 +184,7 @@ function Cart(): JSX.Element {
                         type="button"
                         onClick={() => {
                           increaseCount(cake.id);
-                            setTotalPrice(totalPrice + cake.price);
+                          setTotalPrice(totalPrice + cake.price);
                         }}
                       >
                         +

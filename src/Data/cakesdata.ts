@@ -5,7 +5,9 @@ export interface CakeInterface {
     price: number,
     counter?: number
     isFavorite?: boolean;
-    handleFavorite?: (cakeId: string, isFavorite: boolean) => void;
+    handleFavorites?: (id: string) => void;
+    addToCart?: (id: string) => void;
+    checkIsFavorites?:(id:string)=> boolean;
 }
 export const CakesArray = [
     {

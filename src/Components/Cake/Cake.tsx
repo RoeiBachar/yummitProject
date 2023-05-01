@@ -12,49 +12,15 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { increment } from "../../redux/counterSlice";
 
 function Cake(props: CakeInterface): JSX.Element {
-    const { isFavorite, id } = props;
-  const { handleFavorite } = props;
-  const [thisFav,setThisFav]=useState();
-    useEffect(() => {
-       if(handleFavorite)
-       handleFavorite(id,isFavorite?isFavorite:false)
-       
-    }, []);
+  const { isFavorite, id, handleFavorites, addToCart, checkIsFavorites } =
+    props;
+  const [stam, setstam] = useState(false);
+  const dispatch = useDispatch()
 
-  
-  
-  //   const [isFavorite, setFavorite] = useState(true);
-  const addToCart = () => {
-    const myCartLocalStorage = localStorage.getItem("myCart");
-    if (myCartLocalStorage) {
-      const myCart = JSON.parse(myCartLocalStorage);
-      if (myCart[props.id]) {
-        myCart[props.id]++;
-      } else {
-        myCart[props.id] = 1;
-      }
-      localStorage.setItem("myCart", JSON.stringify(myCart));
-    } else {
-      const cart: { [key: string]: number } = {};
-      cart[props.id] = 1;
-      localStorage.setItem("myCart", JSON.stringify(cart));
-    }
-  };
-  const addToFavorites = () => {
-    const myFavLocalStorage = localStorage.getItem("myFavorites");
-    if (myFavLocalStorage) {
-      const myFav = JSON.parse(myFavLocalStorage) as CakeInterface[];
-      myFav.push(props);
-      localStorage.setItem("myFavorites", JSON.stringify(myFav));
-    } else {
-      const myarr = [];
-      myarr.push(props);
-      localStorage.setItem("myFavorites", JSON.stringify(myarr));
-    }
-  };
-  console.log(props);
   return (
     <div className="Cake">
       <Card sx={{ maxWidth: 645 }}>
@@ -78,8 +44,14 @@ function Cake(props: CakeInterface): JSX.Element {
             {`${props.price}`}&#8362;
           </Typography>
         </CardContent>
-        <div id="buttonsContainer" onClick={() => {}}>
-          <Button size="large" onClick={addToCart}>
+        <div id="buttonsContainer">
+          <Button
+            size="large"
+            onClick={() => {
+              addToCart && addToCart(id);
+              dispatch(increment());
+            }}
+          >
             <AddShoppingCartIcon
               fontSize="inherit"
               style={{ color: "black" }}
@@ -87,22 +59,17 @@ function Cake(props: CakeInterface): JSX.Element {
           </Button>
           <Button
             size="large"
-            onClick={()=>handleFavorite && handleFavorite(id, isFavorite?isFavorite:false)}
+            onClick={() => {
+              handleFavorites && handleFavorites(id);
+              setstam(!stam);
+            }}
           >
-            {isFavorite ? (
+            {checkIsFavorites && checkIsFavorites(id) ? (
+              <FavoriteIcon fontSize="inherit" style={{ color: "black" }} />
+            ) : (
               <FavoriteBorderIcon
                 fontSize="inherit"
                 style={{ color: "black" }}
-                onClick={() => {
-                  addToFavorites();
-                  //   setFavorite(!isFavorite);
-                }}
-              />
-            ) : (
-              <FavoriteIcon
-                fontSize="inherit"
-                style={{ color: "black" }}
-                onClick={() => addToFavorites()}
               />
             )}
           </Button>

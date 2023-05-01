@@ -1,36 +1,75 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header/Header";
-import "./Favorites.css";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
-import { CakesArray, CakeInterface } from "../../Data/cakesdata";
+import { CakesArray as Cakes, CakeInterface } from "../../Data/cakesdata";
 import Cake from "../Cake/Cake";
+import "./Favorites.css";
 
 function Favorites(): JSX.Element {
-  useEffect(() => {}, []);
-  const handleFavorite = (id: string, isFavorite: boolean) => {
-    const checkFav = localStorage.getItem("favorites");
-    console.log(checkFav);
-    
-    if (checkFav) {
-      
-      let data = JSON.parse(checkFav);
-      console.log(data);
-      let updatedData = [...data];
-      console.log(updatedData);
-      updatedData = data.map((item: CakeInterface) => {
-        if (id === item.id) {
-          return {
-            ...item,
-            isFavorite: !isFavorite,
-          };
-          
-        }
-        console.log(updatedData);
-      });
+  const [favorites, setFavorites] = useState<{ [key: string]: string }>({});
+  const [stam, setstam] = useState(false);
+
+  useEffect(() => {
+    const myFavoriteLocalStorage = localStorage.getItem("myFavorites");
+    if (myFavoriteLocalStorage) {
+      const favorites: { [key: string]: string } = JSON.parse(
+        myFavoriteLocalStorage
+      );
+      setFavorites(favorites);
+      console.log(favorites);
+    } else {
+      console.log("אין מועדפים");
     }
+  }, []);
 
+  const addToCart = (id: string) => {
+    const myCartLocalStorage = localStorage.getItem("myCart");
+    if (myCartLocalStorage) {
+      const myCart = JSON.parse(myCartLocalStorage);
+      if (myCart[id]) {
+        myCart[id]++;
+      } else {
+        myCart[id] = 1;
+      }
+      localStorage.setItem("myCart", JSON.stringify(myCart));
+    } else {
+      const cart: { [key: string]: number } = {};
+      cart[id] = 1;
+      localStorage.setItem("myCart", JSON.stringify(cart));
+    }
   };
+  const checkIsFavorites = (id: string) => {
+    const myFavoriteLocalStorage = localStorage.getItem("myFavorites");
+    if (myFavoriteLocalStorage) {
+      const favorites: { [key: string]: string } = JSON.parse(
+        myFavoriteLocalStorage
+      );
+      if (favorites[id]) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  };
+  const handleFavorites = (id: string) => {
+    const myFavoritesLocalStorage = localStorage.getItem("myFavorites");
+    if (myFavoritesLocalStorage) {
+      const myFavorites = JSON.parse(myFavoritesLocalStorage);
+      if (myFavorites[id] !== undefined) {
+        myFavorites[id] = !myFavorites[id];
+      } else {
+        myFavorites[id] = true;
+      }
 
+      localStorage.setItem("myFavorites", JSON.stringify(myFavorites));
+      setFavorites(myFavorites);
+    } else {
+      const myFavorites: { [key: string]: boolean } = {};
+      myFavorites[id] = true;
+      localStorage.setItem("myFavorites", JSON.stringify(myFavorites));
+    }
+  };
   return (
     <div className="Favorites">
       <Header />
@@ -39,9 +78,20 @@ function Favorites(): JSX.Element {
         <FavoriteOutlinedIcon style={{ fontSize: "8vh" }} />
         cakes
       </h1>
-      {CakesArray.map((item: CakeInterface,index) => (
-        <Cake key={index} {...item} handleFavorite={handleFavorite} />
-      ))}
+      <div id="favoritesContainer">
+        {" "}
+        {Cakes.filter((favorite) => favorites[favorite.id]).map(
+          (cake, index) => (
+            <Cake
+              key={index}
+              {...cake}
+              handleFavorites={handleFavorites}
+              checkIsFavorites={checkIsFavorites}
+              addToCart={addToCart}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 }
