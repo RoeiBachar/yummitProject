@@ -19,43 +19,64 @@ function Cart(): JSX.Element {
   const [cakes, setCakes] = useState<CakeInterface[]>(CakesArray);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cart, setCart] = useState<{ [key: string]: number }>({});
-  const [totalItems,setTotalItems]=useState(0);
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
-
-  console.log("cart", cart);
-  console.log("cakes", cakes);
+  const [totalItems, setTotalItems] = useState(0);
+  const count = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch();
+  const myStyle = {
+    fontSize: "1.7rem",
+    fontWeight: "bold",
+    border: "1px solid black",
+  };
 
   useEffect(() => {
     const myCartLocalStorage = localStorage.getItem("myCart");
     if (myCartLocalStorage) {
       const cart: { [key: string]: number } = JSON.parse(myCartLocalStorage);
       setCart(cart);
-
       let priceSum = 0;
-      let itemsSum=0;
+      let itemsSum = 0;
       cakes.map((item) => {
-        priceSum += cart[item.id] * item.price;
-        itemsSum+= cart[item.id];
+        console.log(cart[item.id]);
+        if (cart[item.id] * item.price) {
+          priceSum += cart[item.id] * item.price;
+          itemsSum += cart[item.id];
+        }
       });
-      setTotalItems(itemsSum)
-      dispatch(updateAmount(itemsSum))
+      setTotalItems(itemsSum);
+      dispatch(updateAmount(itemsSum));
       console.log(itemsSum);
-      
+
       setTotalPrice(priceSum);
     } else {
       console.log("הסל ריק");
     }
   }, []);
+
+  const countTheCart = (num: number) => {
+    const myCartCountLocalStorage = localStorage.getItem("myCartCount");
+    if (myCartCountLocalStorage) {
+      if (num > 0) {
+        const count = JSON.parse(myCartCountLocalStorage) + 1;
+        localStorage.setItem("myCartCount", JSON.stringify(count));
+      } else {
+        const count = JSON.parse(myCartCountLocalStorage) - 1;
+        localStorage.setItem("myCartCount", JSON.stringify(count));
+      }
+    } else {
+      const count = 0;
+      localStorage.setItem("myCartCount", JSON.stringify(count));
+    }
+  };
   const increaseCount = (id: string) => {
     const cartClone = { ...cart };
     cartClone[id]++;
     setCart(cartClone);
-    dispatch(increment())
+    dispatch(increment());
 
     if (localStorage.getItem("myCart")) {
       const myCartClone = JSON.stringify(cartClone);
       localStorage.setItem("myCart", myCartClone);
+      countTheCart(1);
     }
   };
 
@@ -65,10 +86,11 @@ function Cart(): JSX.Element {
       cartClone[id]--;
     }
     setCart(cartClone);
-    dispatch(decrement())
+    dispatch(decrement());
     if (localStorage.getItem("myCart")) {
       const myCartClone = JSON.stringify(cartClone);
       localStorage.setItem("myCart", myCartClone);
+      countTheCart(-1);
     }
   };
   console.log(cart.length);
@@ -77,55 +99,20 @@ function Cart(): JSX.Element {
       <Header />
       <h1>סל קניות</h1>
       <div className="table-wrapper">
-        <TableContainer
-          component={Paper}
-          style={{ width: "150vh", alignItems: "center" }}
-        >
-          <Table
-            style={{ textAlign: "center" }}
-            sx={{ minWidth: 350 }}
-            aria-label="simple table"
-          >
+        <TableContainer component={Paper}>
+          <Table style={{ textAlign: "center" }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell
-                  style={{
-                    fontSize: "3vh",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                  align="center"
-                >
+                <TableCell style={myStyle} align="center">
                   מחיר
                 </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "3vh",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                  align="center"
-                >
+                <TableCell style={myStyle} align="center">
                   שם
                 </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "3vh",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                  align="center"
-                >
+                <TableCell style={myStyle} align="center">
                   תמונה
                 </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "3vh",
-                    fontWeight: "bold",
-                    border: "1px solid black",
-                  }}
-                  align="center"
-                >
+                <TableCell style={myStyle} align="center">
                   כמות
                 </TableCell>
               </TableRow>
@@ -139,37 +126,25 @@ function Cart(): JSX.Element {
                     sx={{ "&:last-child td, &:last-child th": { border: 5 } }}
                   >
                     <TableCell
-                      style={{ fontSize: "3vh", border: "1px solid black" }}
+                      style={myStyle}
                       component="th"
                       scope="row"
                       align="center"
                     >
                       {`${cake.price}`}₪
                     </TableCell>
-                    <TableCell
-                      style={{ fontSize: "3vh", border: "1px solid black" }}
-                      align="center"
-                    >
+                    <TableCell style={myStyle} align="center">
                       {cake.name}
                     </TableCell>
-                    <TableCell
-                      style={{ fontSize: "3vh", border: "1px solid black" }}
-                      align="center"
-                    >
+                    <TableCell style={myStyle} align="center">
                       <img
                         src={cake.img}
                         style={{
-                          width: "10vh",
                           maxWidth: "100%",
-                          height: "10vh",
                         }}
                       />
                     </TableCell>
-                    <TableCell
-                      style={{ fontSize: "3vh", border: "1px solid black" }}
-                      align="center"
-                    >
-                      {" "}
+                    <TableCell style={myStyle} align="center">
                       <button
                         onClick={() => {
                           decreaseCount(cake.id);
@@ -193,7 +168,7 @@ function Cart(): JSX.Element {
                   </TableRow>
                 ))}
               <TableRow>
-                <TableCell style={{ fontSize: "4vh" }} align="center">
+                <TableCell style={{ fontSize: "1.8rem" }} align="center">
                   {totalPrice}&#8362;
                 </TableCell>
               </TableRow>

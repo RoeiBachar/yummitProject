@@ -4,10 +4,10 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { CakesArray as Cakes, CakeInterface } from "../../Data/cakesdata";
 import Cake from "../Cake/Cake";
 import "./Favorites.css";
+import { addToCart } from "../services/functions";
 
 function Favorites(): JSX.Element {
   const [favorites, setFavorites] = useState<{ [key: string]: string }>({});
-  const [stam, setstam] = useState(false);
 
   useEffect(() => {
     const myFavoriteLocalStorage = localStorage.getItem("myFavorites");
@@ -22,22 +22,6 @@ function Favorites(): JSX.Element {
     }
   }, []);
 
-  const addToCart = (id: string) => {
-    const myCartLocalStorage = localStorage.getItem("myCart");
-    if (myCartLocalStorage) {
-      const myCart = JSON.parse(myCartLocalStorage);
-      if (myCart[id]) {
-        myCart[id]++;
-      } else {
-        myCart[id] = 1;
-      }
-      localStorage.setItem("myCart", JSON.stringify(myCart));
-    } else {
-      const cart: { [key: string]: number } = {};
-      cart[id] = 1;
-      localStorage.setItem("myCart", JSON.stringify(cart));
-    }
-  };
   const checkIsFavorites = (id: string) => {
     const myFavoriteLocalStorage = localStorage.getItem("myFavorites");
     if (myFavoriteLocalStorage) {
@@ -61,7 +45,6 @@ function Favorites(): JSX.Element {
       } else {
         myFavorites[id] = true;
       }
-
       localStorage.setItem("myFavorites", JSON.stringify(myFavorites));
       setFavorites(myFavorites);
     } else {
@@ -74,9 +57,7 @@ function Favorites(): JSX.Element {
     <div className="Favorites">
       <Header />
       <h1>
-        My
-        <FavoriteOutlinedIcon style={{ fontSize: "8vh" }} />
-        cakes
+       העוגות שאהבתי
       </h1>
       <div id="favoritesContainer">
         {" "}

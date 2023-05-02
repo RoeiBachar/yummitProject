@@ -1,5 +1,5 @@
 .Cart {
-    height: 100vh;
+    height: 100%;
 }
 .table-wrapper {
     display: flex;
@@ -8,7 +8,7 @@
     overflow-x: auto;
 }
 .Cart>h1{
-    font-size: 4vh;
-    margin: 0 5vw;
+    font-size: 4rem;
+    margin: 2rem 5rem;
 }
 

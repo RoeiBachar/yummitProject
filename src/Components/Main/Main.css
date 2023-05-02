@@ -1,5 +1,5 @@
 .Main {
-    height: 100vh;
+min-height: 80rem;
 
   }
   
@@ -29,11 +29,7 @@
     }
   }
   @media screen and (max-width: 768px) {
-    .Main {
-    height: 120vh;
-    }
-    
     .Main > img {
-    max-width: 80%;
+    max-width: 60%;
     }
     }

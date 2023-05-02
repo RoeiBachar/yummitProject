@@ -18,7 +18,7 @@ import { increment } from "../../redux/counterSlice";
 function Cake(props: CakeInterface): JSX.Element {
   const { isFavorite, id, handleFavorites, addToCart, checkIsFavorites } =
     props;
-  const [stam, setstam] = useState(false);
+  const [changeIcon, setChangeIcon] = useState(false);
   const dispatch = useDispatch()
 
   return (
@@ -61,7 +61,7 @@ function Cake(props: CakeInterface): JSX.Element {
             size="large"
             onClick={() => {
               handleFavorites && handleFavorites(id);
-              setstam(!stam);
+              setChangeIcon(!changeIcon);
             }}
           >
             {checkIsFavorites && checkIsFavorites(id) ? (

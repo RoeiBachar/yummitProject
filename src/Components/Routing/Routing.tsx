@@ -7,8 +7,19 @@ import QA from "../QA/QA";
 import About from "../About/About";
 import Cart from "../Cart/Cart";
 import Favorites from "../Favorites/Favorites";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateAmount } from "../../redux/counterSlice";
 
 function Routing(): JSX.Element {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const myCartCountLocalStorage = localStorage.getItem("myCartCount");
+    if (myCartCountLocalStorage) {
+      let myCount = JSON.parse(myCartCountLocalStorage);
+      dispatch(updateAmount(myCount));
+    }
+  }, []);
   return (
     <div className="Routing">
       <Routes>

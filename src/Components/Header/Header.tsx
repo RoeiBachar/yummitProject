@@ -14,18 +14,25 @@ function Header(): JSX.Element {
   const count = useSelector((state: RootState) => state.counter.value);
   console.log(count);
 
+  const myStyle={
+    width: "32.5rem",
+        fontSize: "2.2rem",
+        backgroundColor: "#fba5ed",
+        color: "black",
+        border: "dotted 1px #f48ce4",
+  }
   return (
     <div className="Header">
       <div id="favAndCart">
         <Link to="/cart">
           <div id="cartContainer">
             <span>{count!=0?count:""}</span>
-            <ShoppingCartRoundedIcon style={{ fontSize: "10vh" }} />
+            <ShoppingCartRoundedIcon style={{ fontSize: "7rem" }} />
           </div>
         </Link>
 
         <Link to="/favorites">
-          <FavoriteOutlinedIcon style={{ fontSize: "7vh" }} />
+          <FavoriteOutlinedIcon style={{ fontSize: "6rem" }} />
         </Link>
       </div>
       <div id="buttonConatiner">
@@ -36,14 +43,13 @@ function Header(): JSX.Element {
                 variant="contained"
                 {...bindTrigger(popupState)}
                 style={{
-                  fontSize: "50px",
-                  width: "40vh",
+                  fontSize: "2.7rem",
                   backgroundColor: "#fba5ed",
                   fontFamily: "arial",
                   color: "black",
                 }}
               >
-                <ExpandMoreIcon style={{ fontSize: "50px" }} />
+                <ExpandMoreIcon  />
                 תפריט
               </Button>
 
@@ -51,13 +57,7 @@ function Header(): JSX.Element {
                 <Link to="/">
                   <MenuItem
                     onClick={popupState.close}
-                    style={{
-                      fontSize: "50px",
-                      width: "40vh",
-                      backgroundColor: "#fba5ed",
-                      color: "black",
-                      border: "dotted 1px #f48ce4",
-                    }}
+                    style={myStyle}
                   >
                     דף הבית
                   </MenuItem>
@@ -65,13 +65,7 @@ function Header(): JSX.Element {
                 <Link to="/about">
                   <MenuItem
                     onClick={popupState.close}
-                    style={{
-                      fontSize: "50px",
-                      width: "40vh",
-                      backgroundColor: "#fba5ed",
-                      color: "black",
-                      border: "dotted 1px #f48ce4",
-                    }}
+                    style={myStyle}
                   >
                     קצת עליי...
                   </MenuItem>
@@ -79,13 +73,7 @@ function Header(): JSX.Element {
                 <Link to="/cakes">
                   <MenuItem
                     onClick={popupState.close}
-                    style={{
-                      fontSize: "50px",
-                      width: "40vh",
-                      backgroundColor: "#fba5ed",
-                      color: "black",
-                      border: "dotted 1px #f48ce4",
-                    }}
+                    style={myStyle}
                   >
                     העוגות שלי
                     <CakeIcon style={{ fontSize: "50px" }} />
@@ -94,13 +82,7 @@ function Header(): JSX.Element {
                 <Link to="/qa">
                   <MenuItem
                     onClick={popupState.close}
-                    style={{
-                      fontSize: "50px",
-                      width: "40vh",
-                      backgroundColor: "#fba5ed",
-                      color: "black",
-                      border: "dotted 1px #f48ce4",
-                    }}
+                    style={myStyle}
                   >
                     שאלות ותשובות
                   </MenuItem>

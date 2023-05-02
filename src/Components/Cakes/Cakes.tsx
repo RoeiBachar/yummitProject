@@ -2,24 +2,11 @@ import Cake from "../Cake/Cake";
 import Header from "../Header/Header";
 import "./Cakes.css";
 import { CakesArray, CakeInterface } from "../../Data/cakesdata";
+import { addToCart, countTheCart } from "../services/functions";
 
 function Cakes(): JSX.Element {
-  const addToCart = (id: string) => {
-    const myCartLocalStorage = localStorage.getItem("myCart");
-    if (myCartLocalStorage) {
-      const myCart = JSON.parse(myCartLocalStorage);
-      if (myCart[id]) {
-        myCart[id]++;
-      } else {
-        myCart[id] = 1;
-      }
-      localStorage.setItem("myCart", JSON.stringify(myCart));
-    } else {
-      const cart: { [key: string]: number } = {};
-      cart[id] = 1;
-      localStorage.setItem("myCart", JSON.stringify(cart));
-    }
-  };
+
+  
 
   const checkIsFavorites = (id: string) => {
     const myFavoriteLocalStorage = localStorage.getItem("myFavorites");

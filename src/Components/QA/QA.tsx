@@ -15,15 +15,15 @@ function QA(): JSX.Element {
       <div id="qaContainer">
         {qadata.map(item=>
         <Accordion
-          style={{ maxWidth:"100%",height:"auto",width: "60vh", backgroundColor: "rgb(251, 165, 237)" }}
+          style={{ maxWidth:"100%",width: "90%", backgroundColor: "rgb(251, 165, 237)" }}
         >
           <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
-            <Typography style={{ fontSize: "3vh", fontWeight: "bold",fontFamily:"Gisha"}}>
+            <Typography style={{ fontSize: "2rem", fontWeight: "bold",fontFamily:"Gisha"}}>
               {item.question}
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography style={{ fontSize: "3vh" }}>
+            <Typography style={{ fontSize: "2rem" }}>
             {item.answer}
             </Typography>
           </AccordionDetails>

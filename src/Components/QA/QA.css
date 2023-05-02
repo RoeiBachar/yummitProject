@@ -1,14 +1,14 @@
 .QA {
-	height: 130vh;
+    height: 90rem;
 }
 .QA>h1{
-    font-size: 7vh;
+    font-size: 4rem;
 }
 
 #qaContainer{
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap:1vh;
+    gap:1rem;
 
 }
