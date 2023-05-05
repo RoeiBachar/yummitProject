@@ -15,8 +15,8 @@ function Header(): JSX.Element {
   console.log(count);
 
   const myStyle={
-    width: "32.5rem",
-        fontSize: "2.2rem",
+    width: "22.5rem",
+        fontSize: "2.0rem",
         backgroundColor: "#fba5ed",
         color: "black",
         border: "dotted 1px #f48ce4",
@@ -43,7 +43,7 @@ function Header(): JSX.Element {
                 variant="contained"
                 {...bindTrigger(popupState)}
                 style={{
-                  fontSize: "2.7rem",
+                  fontSize: "1.5rem",
                   backgroundColor: "#fba5ed",
                   fontFamily: "arial",
                   color: "black",
