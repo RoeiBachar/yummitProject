@@ -6,5 +6,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  direction: rtl;
+
   gap: 1rem;
 }
