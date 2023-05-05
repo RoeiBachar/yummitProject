@@ -1,15 +1,14 @@
 .Favorites {
-    font-size: 2rem;
-    min-height: 100rem;
+  font-size: 2rem;
 }
 
-.Favorites>h1{
-    font-size: 4rem;
+.Favorites > h1 {
+  font-size: 4rem;
 }
 
-#favoritesContainer{
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
+#favoritesContainer {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
 }

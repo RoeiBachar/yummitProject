@@ -6,7 +6,7 @@ import { addToCart, countTheCart } from "../services/functions";
 
 function Cakes(): JSX.Element {
 
-  
+
 
   const checkIsFavorites = (id: string) => {
     const myFavoriteLocalStorage = localStorage.getItem("myFavorites");
@@ -42,15 +42,15 @@ function Cakes(): JSX.Element {
 
   return (
     <div className="Cakes">
-      <Header />
       <h1>העוגות שלי</h1>
       <div id="cakesContainer">
-        {CakesArray.map((cake) => (
+        {CakesArray.map((cake, index) => (
           <Cake
             {...cake}
             handleFavorites={handleFavorites}
             addToCart={addToCart}
             checkIsFavorites={checkIsFavorites}
+            key={index}
           />
         ))}
       </div>

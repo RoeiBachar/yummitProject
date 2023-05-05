@@ -1,82 +1,77 @@
 /* For mobile devices */
 @media only screen and (max-width: 767px) {
-    .About>h1{
-      font-size: 3rem;
-    }
-    #aboutContainer{
-      flex-direction: column;
-      font-size: 2rem;
-    }
-    #aboutContainer>p{
-      width: 90%;
-    }
+  .About > h1 {
+    font-size: 3rem;
   }
-  
-  /* For tablets and small laptops */
-  @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    .About>h1{
-      font-size: 6rem;
-    }
-    #aboutContainer{
-      flex-direction: column;
-      font-size: 4rem;
-      
-    }
-    #aboutContainer>p{
-      width: 100%;
-      text-align: center;
+  #aboutContainer {
+    flex-direction: column;
+    font-size: 2rem;
+  }
+  #aboutContainer > p {
+    width: 90%;
+  }
+}
 
-    }
+/* For tablets and small laptops */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .About > h1 {
+    font-size: 6rem;
   }
-  
-  /* For larger laptops and desktops */
-  @media only screen and (min-width: 1024px) {
-    .About>h1{
-      font-size: 8rem;
-    }
-    #aboutContainer{
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 5rem;
-      text-align: center;
-
-    }
-    #aboutContainer>p{
-      width: 70%;
-    }
+  #aboutContainer {
+    flex-direction: column;
+    font-size: 4rem;
   }
-  
-  /* Common styles for all screen sizes */
-  .About {
-    font-family: Gisha;
-    height: 100rem;
-  }
-  
-  .About>h1{
-    direction: rtl;
-  }
-  
-  #aboutContainer{
-    display: flex;
-    justify-content: center;
+  #aboutContainer > p {
+    width: 100%;
     text-align: center;
-    animation: fadeInUp 2.5s ease-in-out forwards;
+  }
+}
+
+/* For larger laptops and desktops */
+@media only screen and (min-width: 1024px) {
+  .About > h1 {
+    font-size: 8rem;
+  }
+  #aboutContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 5rem;
+    text-align: center;
+  }
+  #aboutContainer > p {
+    width: 70%;
+  }
+}
+
+/* Common styles for all screen sizes */
+.About {
+  font-family: Gisha;
+}
+
+.About > h1 {
+  direction: rtl;
+}
+
+#aboutContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  animation: fadeInUp 2.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+#aboutContainer > p {
+  margin: 0 auto;
+}
+
+@keyframes fadeInUp {
+  from {
     opacity: 0;
+    transform: translateY(120px);
   }
-  
-  #aboutContainer>p{
-    margin: 0 auto;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(120px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+}

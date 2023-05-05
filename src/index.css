@@ -4,27 +4,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: linear-gradient(140deg,  #FFAFF2, #d850c1);
-  height: auto;
-  font-family: Gisha !important
-
- 
+  background: linear-gradient(140deg, #ffaff2, #d850c1);
+  height: 100vh;
+  font-family: Gisha !important;
 }
-a{
-    text-decoration: none;
-    color:black
-
+a {
+  text-decoration: none;
+  color: black;
 }
 code {
-  font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.css-6hp17o-MuiList-root-MuiMenu-list{
-    background-color: #fba5ed;
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  background-color: #fba5ed;
 }
 
-.css-o4b71y-MuiAccordionSummary-content{
-    display: flex;
-    justify-content: center;
-    direction: rtl;
+.css-o4b71y-MuiAccordionSummary-content {
+  display: flex;
+  justify-content: center;
+  direction: rtl;
 }

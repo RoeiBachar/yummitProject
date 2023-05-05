@@ -1,11 +1,10 @@
 .Cakes {
-    font-size: 2rem;
-    min-height: 100rem;
+  font-size: 2rem;
 }
 
-#cakesContainer{
-    display: flex;
-    justify-content: center;
-    gap: 5rem;
-    flex-wrap: wrap;
+#cakesContainer {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  flex-wrap: wrap;
 }

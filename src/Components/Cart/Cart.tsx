@@ -35,11 +35,10 @@ function Cart(): JSX.Element {
       setCart(cart);
       let priceSum = 0;
       let itemsSum = 0;
-      cakes.map((item) => {
-        console.log(cart[item.id]);
-        if (cart[item.id] * item.price) {
-          priceSum += cart[item.id] * item.price;
-          itemsSum += cart[item.id];
+      cakes.map((cake) => {
+        if (cart[cake.id] * cake.price) {
+          priceSum += cart[cake.id] * cake.price;
+          itemsSum += cart[cake.id];
         }
       });
       setTotalItems(itemsSum);
@@ -93,10 +92,8 @@ function Cart(): JSX.Element {
       countTheCart(-1);
     }
   };
-  console.log(cart.length);
   return (
     <div className="Cart">
-      <Header />
       <h1>סל קניות</h1>
       <div className="table-wrapper">
         <TableContainer component={Paper}>
@@ -120,9 +117,9 @@ function Cart(): JSX.Element {
             <TableBody>
               {cakes
                 .filter((cake) => cart[cake.id])
-                .map((cake) => (
+                .map((cake, index) => (
                   <TableRow
-                    key={cake.name}
+                    key={index}
                     sx={{ "&:last-child td, &:last-child th": { border: 5 } }}
                   >
                     <TableCell
@@ -139,9 +136,7 @@ function Cart(): JSX.Element {
                     <TableCell style={myStyle} align="center">
                       <img
                         src={cake.img}
-                        style={{
-                          maxWidth: "100%",
-                        }}
+                        width={"200"}
                       />
                     </TableCell>
                     <TableCell style={myStyle} align="center">

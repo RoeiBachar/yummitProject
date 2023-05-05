@@ -1,14 +1,12 @@
 .Cart {
-    height: 100%;
+  height: 100%;
 }
 .table-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
 }
-.Cart>h1{
-    font-size: 4rem;
-    margin: 2rem 5rem;
+.Cart > h1 {
+  font-size: 4rem;
 }
-

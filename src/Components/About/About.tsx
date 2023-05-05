@@ -4,7 +4,6 @@ import "./About.css";
 function About(): JSX.Element {
   return (
     <div className="About">
-      <Header />
       <h1>קצת עליי...</h1>
       <div id="aboutContainer">
         <p className="fade-in-up">

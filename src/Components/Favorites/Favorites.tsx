@@ -55,7 +55,6 @@ function Favorites(): JSX.Element {
   };
   return (
     <div className="Favorites">
-      <Header />
       <h1>
        העוגות שאהבתי
       </h1>

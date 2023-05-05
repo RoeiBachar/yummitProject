@@ -10,6 +10,7 @@ import Favorites from "../Favorites/Favorites";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateAmount } from "../../redux/counterSlice";
+import Header from "../Header/Header";
 
 function Routing(): JSX.Element {
   const dispatch = useDispatch();
@@ -21,17 +22,20 @@ function Routing(): JSX.Element {
     }
   }, []);
   return (
-    <div className="Routing">
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/cakes" element={<Cakes />} />
-        <Route path="/qa" element={<QA />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="*" element={<Main />} />
-      </Routes>
-    </div>
+    <>
+      <Header />
+      <div className="Routing">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/cakes" element={<Cakes />} />
+          <Route path="/qa" element={<QA />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/favorites" element={<Favorites />} />
+          <Route path="*" element={<Main />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
