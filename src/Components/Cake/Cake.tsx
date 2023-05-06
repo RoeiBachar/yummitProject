@@ -11,15 +11,14 @@ import { CakeInterface } from "../../Data/cakesdata";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { increment } from "../../redux/counterSlice";
 
 function Cake(props: CakeInterface): JSX.Element {
-  const { isFavorite, id, handleFavorites, addToCart, checkIsFavorites } =
-    props;
+  const { id, handleFavorites, addToCart, checkIsFavorites } = props;
   const [changeIcon, setChangeIcon] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div className="Cake">

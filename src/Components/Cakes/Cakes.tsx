@@ -1,13 +1,9 @@
 import Cake from "../Cake/Cake";
-import Header from "../Header/Header";
 import "./Cakes.css";
-import { CakesArray, CakeInterface } from "../../Data/cakesdata";
-import { addToCart, countTheCart } from "../services/functions";
+import { CakesArray } from "../../Data/cakesdata";
+import { addToCart } from "../services/functions";
 
 function Cakes(): JSX.Element {
-
-
-
   const checkIsFavorites = (id: string) => {
     const myFavoriteLocalStorage = localStorage.getItem("myFavorites");
     if (myFavoriteLocalStorage) {

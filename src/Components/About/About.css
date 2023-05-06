@@ -11,8 +11,6 @@
     width: 90%;
   }
 }
-
-/* For tablets and small laptops */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .About > h1 {
     font-size: 6rem;
@@ -26,25 +24,21 @@
     text-align: center;
   }
 }
-
-/* For larger laptops and desktops */
 @media only screen and (min-width: 1024px) {
   .About > h1 {
-    font-size: 8rem;
+    font-size: 4rem;
   }
   #aboutContainer {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    font-size: 5rem;
+    font-size: 3rem;
     text-align: center;
   }
   #aboutContainer > p {
     width: 70%;
   }
 }
-
-/* Common styles for all screen sizes */
 .About {
   font-family: Gisha;
 }

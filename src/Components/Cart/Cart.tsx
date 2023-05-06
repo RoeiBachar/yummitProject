@@ -11,16 +11,13 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
 import { decrement, increment, updateAmount } from "../../redux/counterSlice";
 
 function Cart(): JSX.Element {
   const [cakes, setCakes] = useState<CakeInterface[]>(CakesArray);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cart, setCart] = useState<{ [key: string]: number }>({});
-  const [totalItems, setTotalItems] = useState(0);
-  const count = useSelector((state: RootState) => state.counter.value);
   const dispatch = useDispatch();
   const myStyle = {
     fontSize: "1.7rem",
@@ -41,9 +38,7 @@ function Cart(): JSX.Element {
           itemsSum += cart[cake.id];
         }
       });
-      setTotalItems(itemsSum);
       dispatch(updateAmount(itemsSum));
-      console.log(itemsSum);
 
       setTotalPrice(priceSum);
     } else {
@@ -134,10 +129,7 @@ function Cart(): JSX.Element {
                       {cake.name}
                     </TableCell>
                     <TableCell style={myStyle} align="center">
-                      <img
-                        src={cake.img}
-                        width={"200"}
-                      />
+                      <img src={cake.img} width={"200"} />
                     </TableCell>
                     <TableCell style={myStyle} align="center">
                       <button
